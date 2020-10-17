@@ -338,4 +338,7 @@ section .container.active .singinBx .imgBx {
     section .container .user .formBx {
         width: 100%;
     }
+    section .container .user .formBx form span {
+        display: none;
+    }
 }
