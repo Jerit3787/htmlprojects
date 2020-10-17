@@ -116,6 +116,50 @@ section .container .user .formBx {
     transition: 0.5s;
 }
 
+section .container .user .formBx form .imgMRSMBx {
+    position: relative;
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+section .container .user .formBx form .imgMRSMBx .mrsm {
+    width: 70px;
+}
+
+section .container .user .formBx form .imgMRSMBx .mara {
+    padding-left: 20px;
+    width: 70px;
+}
+
+section .container .user .formBx form .namaMRSM {
+    position: relative;
+    margin: auto;
+    width: 70%;
+    height: 10%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    transition: 0.5s;
+}
+
+section .container .user .formBx form .namaMRSM h5 {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    color: #555;
+}
+
 section .container .user .formBx form h2 {
     font-size: 18px;
     font-weight: 600;
@@ -163,6 +207,22 @@ section .container .user .formBx form .signup {
 }
 
 section .container .user .formBx form .signup a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #667eff;
+}
+
+section .container .user .formBx form span {
+    postion: relative;
+    margin-top: 20px;
+    font-size: 8px;
+    letter-spaccing: 1px;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+section .container .user .formBx form span a {
     font-weight: 600;
     text-decoration: none;
     color: #667eff;
