@@ -1,0 +1,55 @@
+section {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+section .topPart {
+    height: auto;
+    width: 100%;
+    margin: 20px 30px 0 0;
+    padding: 0 20px 0 0;
+    color: #ffffff;
+}
+
+section .topPart .welcomeCard {
+    padding: 10px 10px;
+}
+
+section .topPart .welcomeCard p {
+    height: auto;
+    padding: 0;
+    margin: 0;
+    color: rgb(255, 255, 255, 0.6);
+}
+
+section .topPart .welcomeCard h5 {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 255, 255, 0.87);
+}
+
+section .topPart .mainCard {
+    padding: 15px 20px;
+    background-color: rgb(255, 255, 255, 0.05);
+}
+
+section .topPart .mainCard h5 {
+    width: auto;
+    color: rgb(255, 255, 255, 0.87);
+    margin: 0;
+    padding: 0;
+}
+
+section .topPart .mainCard .subtask {
+    width: auto;
+    font-family: 'OpenSans';
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 255, 255, 0.6);
+}
