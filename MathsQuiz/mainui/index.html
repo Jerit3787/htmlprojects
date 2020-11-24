@@ -19,50 +19,67 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+        window.alert("Site currently under development! Please use with care!")
     </script>
     <section>
         <div class=container>
             <div id="mySidenav" class="leftNavigation">
                 <div class="topNavigation">
-                    <span class="userIcon">
-                        account_circle
-                    </span>
-                    <h6>Danish Hakim</h6>
-                    <p class="subtitle2">danish.hakim04@gmail.com</p>
+                    <div class="userIcon">
+                        <span class="userIcon">
+                            account_circle
+                        </span>
+                    </div>
+                    <div class="userText">
+                        <h6>MOHAMMAD DANISH HAKIM BIN MOHD NASIR</h6>
+                        <p class="subtitle2">414 2020</p>
+                    </div>
                 </div>
-                <div class="bottomNavigation">
+                <script>
+                    // Add active class to the current button (highlight it)
+                    function start() {
+                        var header = document.getElementById("bottomNavigation");
+                        var btns = header.getElementsByClassName("menu");
+                        for (var i = 0; i < btns.length; i++) {
+                            btns[i].addEventListener("click", function() {
+                                var current = document.getElementsByClassName("active");
+                                current[0].className = current[0].className.replace(" active", "");
+                                this.className += " active";
+                            });
+                        }
+                    }
+                </script>
+                <div id="bottomNavigation" class="bottomNavigation">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <div class="menu1">
+                    <div class="menu active">
                         <span class="homeIcon">
                             home
                             </span>
-                        <a href="#" class="home">Home</a>
+                        <a href="#" class="text">Home</a>
                     </div>
-                    <div class="menu2">
+                    <div class="menu">
                         <span class="questionsIcon">
                             all_inbox
                         </span>
-                        <a href="#" class="questions">Questions</a>
+                        <a href="#" class="text">Questions</a>
                     </div>
-                    <div class="menu3">
+                    <div class="menu">
                         <span class="settingsIcon">
                             settings
                         </span>
-                        <a href="#" class="settings">Settings</a>
+                        <a href="#" class="text">Settings</a>
                     </div>
-                    <div class="menu4">
+                    <div class="menu">
                         <span class="logoutIcon">
                             login
                         </span>
-                        <a href="#" class="logout">Logout</a>
-                    </div>
-                    <div class="menu5">
+                        <a href="#" class="text">Logout</a>
                     </div>
                 </div>
             </div>
             <div class="mainPanel">
                 <div class="topPanel">
-                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav(); start();">&#9776;</span>
                     <h6>Home</h6>
                 </div>
                 <div class="bottomPanel">
