@@ -28,25 +28,53 @@
         function home() {
             var url = 'home.html';
             var el = document.getElementById('mainFrame');
-            el.src = url; // assign url to src property
+            var oldURL = el.src;
+            var ifr = oldURL.includes(url, 0);
+            if (ifr != true) {
+                el.src = url; // assign url to src property
+                closeNav();
+            } else {
+                closeNav();
+            }
         }
 
         function questions() {
             var url = 'questions.html';
             var el = document.getElementById('mainFrame');
-            el.src = url; // assign url to src property
+            var oldURL = el.src;
+            var ifr = oldURL.includes(url, 0);
+            if (ifr != true) {
+                el.src = url; // assign url to src property
+                closeNav();
+            } else {
+                closeNav();
+            }
         }
 
         function settings() {
             var url = 'questions.html';
             var el = document.getElementById('mainFrame');
-            el.src = url; // assign url to src property
+            var oldURL = el.src;
+            var ifr = oldURL.includes(url, 0);
+            if (ifr != true) {
+                el.src = url; // assign url to src property
+                closeNav();
+            } else {
+                closeNav();
+            }
         }
 
         function logout() {
             var url = 'questions.html';
             var el = document.getElementById('mainFrame');
-            el.src = url; // assign url to src property
+            var oldURL = el.src;
+            var ifr = oldURL.includes(url, 0);
+            if (ifr != true) {
+                el.src = url; // assign url to src property
+                closeNav();
+            } else {
+                closeNav();
+            }
         }
     </script>
     <section>
@@ -103,29 +131,29 @@
                     }
                 </script>
                 <div id="bottomNavigation" class="bottomNavigation">
-                    <div id="main" class="active" onClick="home(); closeNav();">
+                    <div id="main" class="active" onClick="home();">
                         <span class="Icon">
                             home
                             </span>
-                        <a href="javascript:void(0)" onClick="home(); closeNav();" class="text">Home</a>
+                        <a href="javascript:void(0)" onClick="home();" class="text">Home</a>
                     </div>
-                    <div class="menu" onClick="questions(); closeNav();">
+                    <div class="menu" onClick="questions();">
                         <span class="Icon">
                             all_inbox
                         </span>
-                        <a href="javascript:void(0)" onClick="questions(); closeNav();" class="text">Questions</a>
+                        <a href="javascript:void(0)" onClick="questions();" class="text">Questions</a>
                     </div>
-                    <div class="menu" onClick="settings(); closeNav();">
+                    <div class="menu" onClick="settings();">
                         <span class="Icon">
                             settings
                         </span>
-                        <a href="javascript:void(0)" onClick="settings(); closeNav();" class="text">Settings</a>
+                        <a href="javascript:void(0)" onClick="settings();" class="text">Settings</a>
                     </div>
-                    <div class="menu" onClick="logout(); closeNav();">
+                    <div class="menu" onClick="logout()">
                         <span class="Icon">
                             login
                         </span>
-                        <a href="javascript:void(0)" onClick="logout(); closeNav();" class="text">Logout</a>
+                        <a href="javascript:void(0)" onClick="logout();" class="text">Logout</a>
                     </div>
                 </div>
             </div>
