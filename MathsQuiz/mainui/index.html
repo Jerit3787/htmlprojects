@@ -14,15 +14,44 @@
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "25%";
+            document.getElementById("blur").style.visibility = "visible";
+            document.getElementById("blur").style.opacity = "1";
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("blur").style.visibility = "hidden";
+            document.getElementById("blur").style.opacity = "0";
         }
         window.alert("Site currently under development! Please use with care!")
+
+        function home() {
+            var url = 'home.html';
+            var el = document.getElementById('mainFrame');
+            el.src = url; // assign url to src property
+        }
+
+        function questions() {
+            var url = 'questions.html';
+            var el = document.getElementById('mainFrame');
+            el.src = url; // assign url to src property
+        }
+
+        function settings() {
+            var url = 'questions.html';
+            var el = document.getElementById('mainFrame');
+            el.src = url; // assign url to src property
+        }
+
+        function logout() {
+            var url = 'questions.html';
+            var el = document.getElementById('mainFrame');
+            el.src = url; // assign url to src property
+        }
     </script>
     <section>
         <div class=container>
+            <div id="blur" class="blurBackground" onClick="closeNav();"></div>
             <div id="mySidenav" class="leftNavigation">
                 <div class="topNavigation">
                     <div class="userIcon">
@@ -31,49 +60,72 @@
                         </span>
                     </div>
                     <div class="userText">
-                        <h6>MOHAMMAD DANISH HAKIM BIN MOHD NASIR</h6>
+                        <h6>RIDWAN BIN SALEH</h6>
                         <p class="subtitle2">414 2020</p>
                     </div>
                 </div>
                 <script>
-                    // Add active class to the current button (highlight it)
                     function start() {
-                        var header = document.getElementById("bottomNavigation");
-                        var btns = header.getElementsByClassName("menu");
+                        // Get the container element
+                        var btnContainer = document.getElementById("bottomNavigation");
+
+                        // Get all buttons with class="btn" inside the container
+                        var btns = btnContainer.getElementsByClassName("menu");
+
+                        // Adds function to first menu
+                        document.getElementById("main").addEventListener("click", function() {
+                            var current = document.getElementsByClassName("active");
+
+                            // If there's no active class
+                            if (current.length > 0) {
+                                current[0].className = current[0].className.replace("active", "menu");
+                            }
+
+                            // Add the active class to the current/clicked button
+                            this.className = "active";
+                        });
+
+                        // Loop through the buttons and add the active class to the current/clicked button
                         for (var i = 0; i < btns.length; i++) {
                             btns[i].addEventListener("click", function() {
                                 var current = document.getElementsByClassName("active");
-                                current[0].className = current[0].className.replace(" active", "");
-                                this.className += " active";
+
+                                // If there's no active class
+                                if (current.length > 0) {
+                                    current[0].className = current[0].className.replace("active", "menu");
+                                }
+
+                                // Add the active class to the current/clicked button
+                                this.className = "active";
                             });
                         }
+
                     }
                 </script>
                 <div id="bottomNavigation" class="bottomNavigation">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <div class="menu active">
-                        <span class="homeIcon">
+                    <div id="main" class="active" onClick="home(); closeNav();">
+                        <span class="Icon">
                             home
                             </span>
-                        <a href="#" class="text">Home</a>
+                        <a href="javascript:void(0)" onClick="home(); closeNav();" class="text">Home</a>
                     </div>
-                    <div class="menu">
-                        <span class="questionsIcon">
+                    <div class="menu" onClick="questions(); closeNav();">
+                        <span class="Icon">
                             all_inbox
                         </span>
-                        <a href="#" class="text">Questions</a>
+                        <a href="javascript:void(0)" onClick="questions(); closeNav();" class="text">Questions</a>
                     </div>
-                    <div class="menu">
-                        <span class="settingsIcon">
+                    <div class="menu" onClick="settings(); closeNav();">
+                        <span class="Icon">
                             settings
                         </span>
-                        <a href="#" class="text">Settings</a>
+                        <a href="javascript:void(0)" onClick="settings(); closeNav();" class="text">Settings</a>
                     </div>
-                    <div class="menu">
-                        <span class="logoutIcon">
+                    <div class="menu" onClick="logout(); closeNav();">
+                        <span class="Icon">
                             login
                         </span>
-                        <a href="#" class="text">Logout</a>
+                        <a href="javascript:void(0)" onClick="logout(); closeNav();" class="text">Logout</a>
                     </div>
                 </div>
             </div>
@@ -83,7 +135,7 @@
                     <h6>Home</h6>
                 </div>
                 <div class="bottomPanel">
-                    <iframe src="home.html" frameborder="0"></iframe>
+                    <iframe id="mainFrame" class="mainFrame" src="home.html" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
