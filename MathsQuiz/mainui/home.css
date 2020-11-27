@@ -45,10 +45,6 @@
         
         section .HomeUI .mainCard .subtask {
             width: auto;
-            font-family: 'OpenSans';
-            font-size: 14px;
-            letter-spacing: 0.25px;
-            font-weight: 400;
             margin: 0;
             padding: 0;
             color: rgb(255, 255, 255, 0.6);
@@ -117,10 +113,6 @@
         }
         
         section .HomeUI .mainCard .stackCards div .captionText .subtext1 {
-            font-family: 'OpenSans';
-            font-size: 12px;
-            letter-spacing: 0.4px;
-            font-weight: 400;
             color: rgb(255, 255, 255, 0.6);
             padding: 0;
             margin: 0;
@@ -131,10 +123,6 @@
         }
         
         section .HomeUI .mainCard .stackCards div .captionText .subtext2 {
-            font-family: 'OpenSans';
-            font-size: 12px;
-            letter-spacing: 0.4px;
-            font-weight: 400;
             color: rgb(255, 255, 255, 0.6);
             padding: 2px 0;
             margin: 0;
