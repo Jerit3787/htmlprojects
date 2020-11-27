@@ -125,7 +125,6 @@ section .container .leftNavigation .bottomNavigation div {
     width: 100%;
     padding: 10px 0 10px 22px;
     margin: 5px 0;
-    onclick
 }
 
 section .container .leftNavigation .bottomNavigation .menu {
@@ -316,16 +315,6 @@ section .container .mainPanel .bottomPanel iframe {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-}
-
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
-@media screen and (max-height: 450px) {
-    section .sidenav {
-        padding-top: 15px;
-    }
-    section .sidenav a {
-        font-size: 18px;
-    }
+    overflow-y: auto;
+    visibility: hidden;
 }

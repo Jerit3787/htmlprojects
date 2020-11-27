@@ -13,7 +13,7 @@
 <body>
     <script>
         function openNav() {
-            document.getElementById("mySidenav").style.width = "25%";
+            document.getElementById("mySidenav").style.width = "350px";
             document.getElementById("blur").style.visibility = "visible";
             document.getElementById("blur").style.opacity = "1";
         }
@@ -36,6 +36,8 @@
             } else {
                 closeNav();
             }
+            var title = document.getElementById("pageTitle");
+            title.innerHTML = "Home";
         }
 
         function questions() {
@@ -49,10 +51,12 @@
             } else {
                 closeNav();
             }
+            var title = document.getElementById("pageTitle");
+            title.innerHTML = "Questions";
         }
 
         function settings() {
-            var url = 'questions.html';
+            var url = 'settings.html';
             var el = document.getElementById('mainFrame');
             var oldURL = el.src;
             var ifr = oldURL.includes(url, 0);
@@ -62,10 +66,12 @@
             } else {
                 closeNav();
             }
+            var title = document.getElementById("pageTitle");
+            title.innerHTML = "Settings";
         }
 
         function logout() {
-            var url = 'questions.html';
+            var url = 'logout.html';
             var el = document.getElementById('mainFrame');
             var oldURL = el.src;
             var ifr = oldURL.includes(url, 0);
@@ -75,6 +81,8 @@
             } else {
                 closeNav();
             }
+            var title = document.getElementById("pageTitle");
+            title.innerHTML = "Logout";
         }
     </script>
     <section>
@@ -160,10 +168,10 @@
             <div class="mainPanel">
                 <div class="topPanel">
                     <span style="font-size:30px;cursor:pointer" onclick="openNav(); start();">&#9776;</span>
-                    <h6>Home</h6>
+                    <h6 id="pageTitle">Home</h6>
                 </div>
                 <div class="bottomPanel">
-                    <iframe id="mainFrame" class="mainFrame" src="home.html" frameborder="0"></iframe>
+                    <iframe onload="this.style.visibility = 'visible';" id="mainFrame" class="mainFrame" src="home.html" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
