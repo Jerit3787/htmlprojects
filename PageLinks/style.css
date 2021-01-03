@@ -117,8 +117,6 @@ section {
     height: auto;
     border-radius: 50px;
     padding: 5px 10px;
-    width: auto;
-    height: auto;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -127,7 +125,7 @@ section {
 
 .container .topPanel .leftPanel .socialButtons .twitter #buttonText {
     padding: 0px 0px 0px 5px;
-    height: 100%;
+    height: auto;
 }
 
 .container .topPanel .leftPanel h3 {
