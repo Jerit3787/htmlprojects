@@ -5,48 +5,41 @@
     height: 100%;
     width: 100%;
 }
+
 section {
-    background: linear-gradient(to right, #fbd3e9, #bb377d);
-    position: relative;
+    background: #181818;
     height: 100%;
     display: flex;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    padding: 100px;
 }
 
 .container {
-    height: 100%;
+    height: 95%;
     width: 100%;
     display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-    align-content: center;
-    border-radius: 25px;
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    overflow-x: none;
-    overflow-y: hidden;
 }
 
 .container .topPanel {
     background-color: #FFFFFF;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    height: 25%;
-    width: 100%;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    height: auto;
+    width: 90%;
+    padding: 20px 10px;
 }
 
 .container .topPanel .rightPanel {
-    width: 40%;
-    height: 100%;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -56,8 +49,8 @@ section {
 .container .topPanel .rightPanel .imgPanel {
     background:url('img/profileImg.png');
     background-size:cover;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     vertical-align: middle;
     background-color: rgba(0,0,0,.1);
     border-radius: 50%;  
@@ -70,14 +63,12 @@ section {
 }
 
 .container .topPanel .leftPanel {
-    width: 60%;
-    height: 100%;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: flex-start;
-    margin-left: 20px;
-    margin-top: 20px;
+    align-items: center;
 }
 
 .container .topPanel .leftPanel .job {
@@ -85,8 +76,9 @@ section {
     height: auto;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     padding-top: 10px;
 }
 
@@ -96,16 +88,16 @@ section {
     width: auto;
     height: auto;
     border-radius: 50px;
-    padding: 0px 10px;
+    padding: 0px 5px;
 }
 
 .container .topPanel .leftPanel .socialButtons {
     width: auto;
     height: auto;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
     padding-top: 10px;
 }
 
@@ -141,7 +133,16 @@ section {
 }
 
 .container .bottomPanel {
-    height: 75%;
-    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 25px;
+    height: auto;
+    width: 90%;
+    padding: 20px 10px;
+    margin-top: 10px;
 
 }
