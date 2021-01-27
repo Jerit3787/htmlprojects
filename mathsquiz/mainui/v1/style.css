@@ -7,6 +7,31 @@
     font-family: 'Poppins', 'OpenSans';
 }
 
+#transitionLayerFrameStart {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s, visibility 0.2s;
+    background-color: #121212;
+}
+
+#transitionLayerFrameStart .loadingText {
+    height: auto;
+    width: auto;
+    color: white;
+    padding-left: 10px;
+}
+
 section {
     position: relative;
     min-height: 100vh;
@@ -154,6 +179,7 @@ section .container .leftNavigation .bottomNavigation .active,
     margin: 5px 0;
     background-color: rgb(255, 255, 255, 0.05);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 section .container .leftNavigation .bottomNavigation .active .text,
@@ -309,4 +335,21 @@ section .container .mainPanel .bottomPanel iframe {
     overflow-x: hidden;
     overflow-y: auto;
     visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+section .container .mainPanel .bottomPanel #transitionLayerFrame {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    background-color: #121212;
 }
