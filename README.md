@@ -1,5 +1,6 @@
 # Home of my projects (htmlprojects)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Jerit3787/htmlprojects) ![GitHub branch checks state](https://img.shields.io/github/checks-status/Jerit3787/htmlprojects/master) ![GitHub deployments](https://img.shields.io/github/deployments/Jerit3787/htmlprojects/github-pages) ![GitHub](https://img.shields.io/github/license/Jerit3787/htmlprojects) 
+
 All of my computer science projects! [Main site](https://jerit3787.github.io/htmlprojects)
 
 ## Projects
