@@ -1,0 +1,130 @@
+<html>
+
+<head>
+    <title>Stutastic Prototype</title>
+
+    <!-- Display settings-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- material-ui intialization-->
+    <link rel="stylesheet" href="assets/stylesheet/material.min.css">
+    <script src="assets/javascript/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="assets/javascript/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="assets/javascript/firebase-analytics.js"></script>
+    <script src="assets/javascript/firebase-auth.js"></script>
+    <script src="assets/javascript/firebase-firestore.js"></script>
+    <script src="assets/javascript/firebaseui.js"></script>
+    <script src="assets/javascript/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="assets/stylesheet/firebase-ui.css" />
+    <link type="text/css" rel="stylesheet" href="assets/stylesheet/firebase-ui-auth.css" />
+    <link type="text/css" rel="Stylesheet" href="assets/stylesheet/style.css" />
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyC5fAN0QL5RQWt0KgsJkODZER0VWngr0Rc",
+            authDomain: "stutastic-server.firebaseapp.com",
+            databaseURL: "https://stutastic-server-default-rtdb.firebaseio.com",
+            projectId: "stutastic-server",
+            storageBucket: "stutastic-server.appspot.com",
+            messagingSenderId: "269786616381",
+            appId: "1:269786616381:web:c17cc9e33bbe2c946a1054",
+            measurementId: "G-XZEFWH3R3K"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const auth = firebase.auth(); // <----- this is where you define auth
+        const db = firebase.firestore();
+    </script>
+
+    <script>
+        // starts relinking process
+        function relinkAccount() {
+            var provider = new firebase.auth.OAuthProvider('microsoft.com');
+
+            provider.setCustomParameters({
+                prompt: "consent",
+                tenant: "e3bc2a05-2ae6-4a5f-82c5-ca2c65d79a75",
+            });
+
+            console.log("Starting user account relinking process");
+
+            auth.currentUser.linkWithPopup(provider).then((result) => {
+                // Accounts successfully linked.
+                var credential = result.credential;
+                var user = result.user;
+                console.log("User account linked with Microsoft & Email");
+                user.unlink('password').then(() => {
+                    console.log("User unlinked from email auth. Only Microsoft account is allowed to use for login.");
+                }).catch((error) => {
+                    console.log("Hello! this isn't working!");
+                });
+                removeOldAccount();
+            }).catch((error) => {
+                console.log("Hello! this isn't working!");
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Login to your account</span>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="container">
+                    <!-- Wide card with share menu button -->
+                    <style>
+                        .demo-card-wide.mdl-card {
+                            width: 512px;
+                        }
+                        
+                        .demo-card-wide>.mdl-card__title {
+                            color: #121212;
+                            height: 176px;
+                            background: url('assets/image/banner.png') center / cover;
+                        }
+                        
+                        .demo-card-wide>.mdl-card__menu {
+                            color: #fff;
+                        }
+                    </style>
+
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            Hi! Thanks for activating your account! The last step we need to do is to link this account to your school's Microsoft Account! Please click the button below to start the linking process.
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onClick="relinkAccount();" href="#">
+          Start Linking My Account
+        </a>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
