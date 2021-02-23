@@ -50,8 +50,10 @@
                 // Leave the lines as is for the providers you want to offer your users.
                 {
                     provider: 'microsoft.com',
-                    prompt: "consent",
-                    tenant: "e3bc2a05-2ae6-4a5f-82c5-ca2c65d79a75",
+                    customParameters: {
+                        prompt: "consent",
+                        tenant: "e3bc2a05-2ae6-4a5f-82c5-ca2c65d79a75",
+                    }
                 },
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 firebase.auth.EmailAuthProvider.PROVIDER_ID,
