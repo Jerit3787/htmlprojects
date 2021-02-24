@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>Stutastic Prototype</title>
+
+    <!-- Document Settings -->
+    <!-- init charset -->
+    <meta charset="utf-8" />
+    <!-- init display settings -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- material-ui intialization-->
+    <!-- init Material UI CSS -->
+    <link rel="stylesheet" href="../assets/stylesheet/material-ui/material.min.css">
+    <!-- init Material UI Framework -->
+    <script src="../assets/javascript/material-ui/material.min.js"></script>
+    <!-- init Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="../assets/javascript/firebase/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <!-- init firebase analytics -->
+    <script src="../assets/javascript/firebase/firebase-analytics.js"></script>
+    <!-- init firebase authentication -->
+    <script src="../assets/javascript/firebase/firebase-auth.js"></script>
+    <!-- init firebase firestore -->
+    <script src="../assets/javascript/firebase/firebase-firestore.js"></script>
+    <!-- init firebase ui -->
+    <script src="../assets/javascript/firebase/firebaseui.js"></script>
+    <!-- init firebase ui authentication -->
+    <script src="../assets/javascript/firebase/firebase-ui-auth.js"></script>
+    <!-- init firebase-ui CSS -->
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui.css" />
+    <!-- init firebase-ui authentication CSS -->
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui-auth.css" />
+    <!-- init user's customised CSS -->
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/style.css" />
+
+    <!-- import and init firebase configuration -->
+    <script src="../assets/javascript/auth/link.js"></script>
+</head>
+
+<body>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Login to your account</span>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div class="container">
+                    <!-- Wide card with share menu button -->
+                    <style>
+                        .demo-card-wide.mdl-card {
+                            width: 512px;
+                        }
+                        
+                        .demo-card-wide>.mdl-card__title {
+                            color: #121212;
+                            height: 176px;
+                            background: url('../assets/images/banner.png') center / cover;
+                        }
+                        
+                        .demo-card-wide>.mdl-card__menu {
+                            color: #fff;
+                        }
+                    </style>
+
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            Hi! Thanks for activating your account! The last step we need to do is to link this account to your school's Microsoft Account! Please click the button below to start the linking process.
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border" onClick="relinkAccount();">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          Start Linking My Account
+        </a>
+                        </div>
+                        <div class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
