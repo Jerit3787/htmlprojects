@@ -1,22 +1,21 @@
-// fetches the firebase configuration and init firebase
-fetch("../assets/config/firebase.json")
-    .then(response => {
-        return response.json();
-    })
-    .then(data => {
-        initFirebase(data);
-        isLoggedIn();
-    });
+// Initialize Firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyC5fAN0QL5RQWt0KgsJkODZER0VWngr0Rc",
+    authDomain: "stutastic-server.firebaseapp.com",
+    databaseURL: "https://stutastic-server-default-rtdb.firebaseio.com",
+    projectId: "stutastic-server",
+    storageBucket: "stutastic-server.appspot.com",
+    messagingSenderId: "269786616381",
+    appId: "1:269786616381:web:c17cc9e33bbe2c946a1054",
+    measurementId: "G-XZEFWH3R3K"
+};
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+isLoggedIn();
 
-// init firebase config
-function initFirebase(data) {
-    firebase.initializeApp(data);
-    firebase.analytics();
-
-    // Sets constant for firebase uility
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-}
+// Sets constant for firebase uility
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 // redirect configuration
 function isLoggedIn() {

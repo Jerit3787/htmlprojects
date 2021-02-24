@@ -1,33 +1,24 @@
-// fetches the firebase configuration and init firebase
-fetch("../assets/config/firebase.json")
-    .then(response => {
-        return response.json();
-    })
-    .then(data => {
-        initFirebase(data);
-    });
+// Initialize Firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyC5fAN0QL5RQWt0KgsJkODZER0VWngr0Rc",
+    authDomain: "stutastic-server.firebaseapp.com",
+    databaseURL: "https://stutastic-server-default-rtdb.firebaseio.com",
+    projectId: "stutastic-server",
+    storageBucket: "stutastic-server.appspot.com",
+    messagingSenderId: "269786616381",
+    appId: "1:269786616381:web:c17cc9e33bbe2c946a1054",
+    measurementId: "G-XZEFWH3R3K"
+};
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
-// init firebase config
-function initFirebase(data) {
-    firebase.initializeApp(data);
-    firebase.analytics();
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
+// Sets constant for firebase uility
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 // starts relinking process
-async function relinkAccount() {
+function relinkAccount() {
     var provider = new firebase.auth.OAuthProvider('microsoft.com');
-
-    // Sets constant for firebase uility
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    await sleep(2000);
 
     provider.setCustomParameters({
         prompt: "consent",
