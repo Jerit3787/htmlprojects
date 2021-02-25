@@ -34,7 +34,8 @@ function relinkAccount() {
         console.log("User account linked with Microsoft & Email");
         user.unlink('password').then(() => {
             console.log("User unlinked from email auth. Only Microsoft account is allowed to use for login.");
-            window.location.replace('../index.html');
+            console.log("Account ready for usage!")
+            window.location.replace('../auth/index.html');
         }).catch((error) => {
             console.log("Hello! this isn't working!");
         });

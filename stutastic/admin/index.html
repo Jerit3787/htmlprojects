@@ -11,40 +11,40 @@
 
     <!-- material-ui intialization-->
     <!-- init Material UI CSS -->
-    <link rel="stylesheet" href="assets/stylesheet/material-ui/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="../assets/stylesheet/material-ui/material.cyan-light_blue.min.css">
     <!-- init Material UI Framework -->
-    <script src="assets/javascript/material-ui/material.min.js"></script>
+    <script src="../assets/javascript/material-ui/material.min.js"></script>
     <!-- init Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- init Roboto font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <!-- init user's customised stylesheet -->
-    <link rel="stylesheet" href="assets/stylesheet/styles.css">
+    <link rel="stylesheet" href="../assets/stylesheet/styles.css">
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="assets/javascript/firebase/firebase-app.js"></script>
+    <script src="../assets/javascript/firebase/firebase-app.js"></script>
 
     <!-- Add Firebase products that you want to use -->
     <!-- init firebase analytics -->
-    <script src="assets/javascript/firebase/firebase-analytics.js"></script>
+    <script src="../assets/javascript/firebase/firebase-analytics.js"></script>
     <!-- init firebase authentication -->
-    <script src="assets/javascript/firebase/firebase-auth.js"></script>
+    <script src="../assets/javascript/firebase/firebase-auth.js"></script>
     <!-- init firebase firestore -->
-    <script src="assets/javascript/firebase/firebase-firestore.js"></script>
+    <script src="../assets/javascript/firebase/firebase-firestore.js"></script>
     <!-- init firebase ui -->
-    <script src="assets/javascript/firebase/firebaseui.js"></script>
+    <script src="../assets/javascript/firebase/firebaseui.js"></script>
     <!-- init firebase ui authentication -->
-    <script src="assets/javascript/firebase/firebase-ui-auth.js"></script>
+    <script src="../assets/javascript/firebase/firebase-ui-auth.js"></script>
     <!-- init firebase-ui CSS -->
-    <link type="text/css" rel="stylesheet" href="assets/stylesheet/firebase/firebase-ui.css" />
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui.css" />
     <!-- init firebase-ui authentication CSS -->
-    <link type="text/css" rel="stylesheet" href="assets/stylesheet/firebase/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui-auth.css" />
     <!-- init user's customised CSS -->
-    <link type="text/css" rel="stylesheet" href="assets/stylesheet/styles.css" />
-    <link type="text/css" rel="stylesheet" href="assets/stylesheet/styles-demo.css" />
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/styles.css" />
+    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/styles-demo.css" />
 
     <!-- import and init firebase configuration -->
-    <script src="assets/javascript/main/app.js"></script>
+    <script src="../assets/javascript/admin/app.js"></script>
 </head>
 
 <body>
@@ -74,7 +74,7 @@
         </header>
         <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
-                <img src="assets/images/user.jpg" class="demo-avatar">
+                <img src="../assets/images/user.jpg" class="demo-avatar">
                 <span id="userName"></span>
                 <div class="demo-avatar-dropdown">
                     <span id="userEmail"></span>
@@ -124,29 +124,34 @@
               </svg>
                 </div>
                 <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-                    <table class="mdl-data-table mdl-js-data-table " style="width:100%;">
+                    <h5>List of Not Collected Parcel</h5>
+                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable" style="width:100%;">
                         <thead>
                             <tr>
                                 <th class="mdl-data-table__cell--non-numeric">Tracking Number</th>
-                                <th>Courier</th>
-                                <th>Date Arrived</th>
+                                <th class="mdl-data-table__cell--non-numeric">Courier</th>
+                                <th class="mdl-data-table__cell--non-numeric">College Number</th>
+                                <th class="mdl-data-table__cell--non-numeric">Date Arrived</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td>POSLAJU</td>
-                                <td>22/01/2021</td>
+                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
+                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
+                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
                             </tr>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td>J&T</td>
-                                <td>22/01/2021</td>
+                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
+                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
+                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
                             </tr>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td>CITYLINK</td>
-                                <td>22/01/2021</td>
+                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
+                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
+                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
                             </tr>
                         </tbody>
                     </table>
@@ -160,7 +165,7 @@
                             Need to add parcel? Just click the button below to quickly add new parcel!
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
-                            <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">ADD PARCEL</a>
+                            <a href="parcel/add-parcel.html" class="mdl-button mdl-js-button mdl-js-ripple-effect">ADD PARCEL</a>
                         </div>
                     </div>
                     <div class="demo-separator mdl-cell--1-col"></div>

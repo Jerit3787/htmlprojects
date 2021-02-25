@@ -78,6 +78,6 @@ function checkHasRelinked(user) {
     if (providerData == "password") {
         window.location.replace('link-account.html');
     } else {
-        window.location.replace('../index.html');
+        window.location.replace('../admin/index.html');
     }
 }
