@@ -1,5 +1,4 @@
-var userData = "";
-
+// Initialize Firebase
 var firebaseConfig = {
     apiKey: "AIzaSyC5fAN0QL5RQWt0KgsJkODZER0VWngr0Rc",
     authDomain: "stutastic-server.firebaseapp.com",
@@ -10,7 +9,6 @@ var firebaseConfig = {
     appId: "1:269786616381:web:c17cc9e33bbe2c946a1054",
     measurementId: "G-XZEFWH3R3K"
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
