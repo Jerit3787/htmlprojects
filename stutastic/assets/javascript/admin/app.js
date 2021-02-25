@@ -65,7 +65,16 @@ function signOutFirebase() {
     });
 };
 
-function updateInfomation() {
+warning();
 
-    user.innerHTML = "";
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function warning() {
+    await sleep(2000);
+    var notification = document.querySelector('.mdl-js-snackbar');
+    notification.MaterialSnackbar.showSnackbar({
+        message: 'This website is still under construction! Please use with care! :) Best used with 1366 x 768 (FWXGA) displays! Not optimised for mobile!'
+    });
 }
