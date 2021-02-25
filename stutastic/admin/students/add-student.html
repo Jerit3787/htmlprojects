@@ -44,7 +44,7 @@
     <link type="text/css" rel="stylesheet" href="../../assets/stylesheet/styles-demo.css" />
 
     <!-- import and init firebase configuration -->
-    <script src="../../assets/javascript/parcel/app.js"></script>
+    <script src="../../assets/javascript/students/update-app.js"></script>
 </head>
 
 <body>
@@ -92,7 +92,7 @@
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
                 <a class="mdl-navigation__link" href="../index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Parcel</a>
-                <a class="mdl-navigation__link" href="../students/index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Students</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Students</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
@@ -107,38 +107,64 @@
             <div class="mdl-grid demo-content">
                 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div class="mdl-cell mdl-cell--12-col">
-                        <p style="color:grey; font-size:10px;">Home > Parcel > Add New Parcel</p>
-                        <h3>Add New Parcel</h3>
+                        <p style="color:grey; font-size:10px;">Home > Students > Add New Student</p>
+                        <h3>Add New Students</h3>
                     </div>
                     <div class="mdl-cell mdl-cell--12-col">
                         <!-- Textfield with Floating Label -->
-                        <form id="addParcelForm" action="#">
-                            <label>Tracking Number :</label>
+                        <form id="addStudentForm" action="#">
+                            <label>College Number :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Tracking Number</label>
+                                <input class="mdl-textfield__input" type="text" name="collegeID">
+                                <label class="mdl-textfield__label" for="sample1">ex. MJXXXXXX</label>
                             </div>
                             <br>
-                            <label>Courier :</label>
+                            <label>Student Name :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Courier</label>
+                                <input class="mdl-textfield__input" type="text" name="name">
+                                <label class="mdl-textfield__label" for="sample1">ex. Ahmad Haziq</label>
                             </div>
                             <br>
-                            <label>Student's College Number :</label>
+                            <label>Class :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Courier</label>
+                                <input class="mdl-textfield__input" type="text" name="classID">
+                                <label class="mdl-textfield__label" for="sample1">ex. 4XX/5XX</label>
+                            </div>
+                            <br>
+                            <label>School Email :</label>
+                            <br>
+                            <!-- Simple Textfield -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" name="emailID">
+                                <label class="mdl-textfield__label" for="sample1">ex. MJXXXXXX@tgb.mrsm.edu.my</label>
+                            </div>
+                            <br>
+                            <label>Student National ID :</label>
+                            <br>
+                            <!-- Simple Textfield -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="studentPassword">
+                                <label class="mdl-textfield__label" for="sample1">ex. 990302073345</label>
+                                <span class="mdl-textfield__error">Input is not a valid IC!</span>
+                            </div>
+                            <br>
+                            <label>Your Admin Password (re-authenticate purposes) :</label>
+                            <br>
+                            <!-- Simple Textfield -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" name="adminPassword">
+                                <label class="mdl-textfield__label" for="sample1">admin password</label>
                             </div>
                         </form>
-                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" form="addParcelForm" value="Submit">Add Parcel</button>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" form="addStudentForm" value="Submit">Add Student</button>
                         <button style="margin:10px;" class="mdl-button mdl-js-button mdl-button--raised" onClick="window.location.href='index.html'">Cancel</button>
+                        <button style="margin:10px;" class="mdl-button mdl-js-button mdl-button--raised" onClick="reAuth();">ReAuth</button>
                     </div>
                 </div>
             </div>
