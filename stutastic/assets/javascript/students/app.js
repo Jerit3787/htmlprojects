@@ -57,35 +57,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
 });
 
-// Prompt the user to re-provide their sign-in credentials
-function reAuth() {
-    var user = firebase.auth().currentUser;
-    var unForm = document.querySelector('#addStudentForm');
-
-    //gets user data
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
-
-    if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    }
-    var credential = firebase.auth.EmailAuthProvider.credential(email, unForm.adminPassword.value);
-
-    user.reauthenticateWithCredential(credential).then(function() {
-        // User re-authenticated.
-        console.log("User has been reauthenticated!");
-    }).catch(function(error) {
-        // An error happened.
-        console.log("Hello! this isn't working!");
-    });
-}
-
 function signOutFirebase() {
     firebase.auth().signOut().then(function() {
         window.location.replace('../../auth/index.html');
@@ -120,6 +91,24 @@ function announceUser(user) {
     }
 }
 
+async function refreshTable() {
+    const removeChilds = (parent) => {
+        while (parent.lastChild) {
+            parent.removeChild(parent.lastChild);
+        }
+    };
+
+    // select target target 
+    const body = document.querySelector('#studentsTable');
+
+    // remove all child nodes
+    console.log("Refreshing table");
+    console.log("Deleting table");
+    await removeChilds(body);
+    loadTable();
+
+}
+
 var studentsTable;
 loadTable();
 
@@ -127,7 +116,9 @@ async function loadTable() {
     await sleep(2000);
     studentsTable = document.querySelector('#studentsTable');
     console.log("table ready for initlization!");
-    collectData();
+    await collectData();
+    document.getElementById("loadingPane").style.visibility = "hidden";
+    document.getElementById("loadingPane").style.opacity = "0";
 }
 
 function renderTable(doc) {
@@ -136,19 +127,43 @@ function renderTable(doc) {
     let name = document.createElement('td');
     let classID = document.createElement('td');
     let emailID = document.createElement('td');
+    let actions = document.createElement('td');
+    let cross = document.createElement("div");
 
     tableRow.setAttribute('data-id', doc.id);
+    collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    name.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    classID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    emailID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    actions.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    cross.setAttribute('class', "material-icons");
     collegeID.textContent = doc.data().collegeID;
     name.textContent = doc.data().name;
     classID.textContent = doc.data().classID;
     emailID.textContent = doc.data().emailID;
+    cross.textContent = "clear";
 
     studentsTable.appendChild(tableRow);
+    actions.appendChild(cross);
     tableRow.appendChild(collegeID);
     tableRow.appendChild(name);
     tableRow.appendChild(classID);
     tableRow.appendChild(emailID);
+    tableRow.appendChild(actions);
 
+    cross.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let id = e.target.parentElement.parentElement.getAttribute('data-id');
+        console.log("deleting data from database");
+        db.collection("userDatabase").doc(id).delete().then(() => {
+            console.log("data deleted successfully!");
+            refreshTable();
+            var notification = document.querySelector('.mdl-js-snackbar');
+            notification.MaterialSnackbar.showSnackbar({
+                message: 'Parcel Deleted Successfully!'
+            });
+        });
+    })
 }
 
 function collectData() {
@@ -159,4 +174,12 @@ function collectData() {
         })
         console.log("data rendered!");
     })
+}
+
+async function iframeTransition() {
+    document.getElementById("loadingPane").style.visibility = "visible";
+    document.getElementById("loadingPane").style.opacity = "1";
+    await sleep(2000);
+    document.getElementById("transitionLayerFrame").style.visibility = "hidden";
+    document.getElementById("transitionLayerFrame").style.opacity = "0";
 }

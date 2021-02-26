@@ -32,7 +32,7 @@ function isLoggedIn() {
         if (user) {
             console.log("no action needed!");
         } else {
-            window.location.replace('../auth/index.html');
+            window.location.replace('../../auth/index.html');
             console.log("redicted excetuted!");
         }
     })
@@ -59,24 +59,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 function signOutFirebase() {
     firebase.auth().signOut().then(function() {
-        window.location.replace('../auth/index.html');
+        window.location.replace('../../auth/index.html');
     }).catch(function(error) {
         console.log("Hello! this isn't working!");
     });
 };
 
-warning();
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function warning() {
-    await sleep(2000);
-    var notification = document.querySelector('.mdl-js-snackbar');
-    notification.MaterialSnackbar.showSnackbar({
-        message: 'This website is still under construction! Please use with care! :) Best used with 1366 x 768 (FWXGA) displays! Not optimised for mobile!'
-    });
 }
 
 function announceUser(user) {
@@ -101,34 +91,20 @@ function announceUser(user) {
     }
 }
 
-async function refreshTable() {
-    const removeChilds = (parent) => {
-        while (parent.lastChild) {
-            parent.removeChild(parent.lastChild);
-        }
-    };
+var form;
+loadForm();
 
-    // select target target 
-    const body = document.querySelector('#parcelTable');
-
-    // remove all child nodes
-    console.log("Refreshing table");
-    console.log("Deleting table");
-    await removeChilds(body);
-    loadTable();
-
-}
-
-var studentsTable;
-loadTable();
-
-async function loadTable() {
+async function loadForm() {
     await sleep(2000);
-    studentsTable = document.querySelector('#parcelTable');
-    console.log("table ready for initlization!");
-    await collectData();
+    form = document.querySelector('#addParcelForm');
+    console.log("form ready for usage!");
     document.getElementById("loadingPane").style.visibility = "hidden";
     document.getElementById("loadingPane").style.opacity = "0";
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        updateDatabase();
+    })
 }
 
 function toDateTime(secs) {
@@ -139,49 +115,35 @@ function toDateTime(secs) {
     return stringDate;
 }
 
-function renderTable(doc) {
-    var dateArrivedValue = toDateTime(doc.data().dateArrived.seconds);
-    let tableRow = document.createElement('tr');
-    let trackingID = document.createElement('td');
-    let courierID = document.createElement('td');
-    let collegeID = document.createElement('td');
-    let dateArrived = document.createElement('td');
-    let statusID = document.createElement('td');
-
-    tableRow.setAttribute('data-id', doc.id);
-    trackingID.setAttribute('class', "mdl-data-table__cell--non-numeric");
-    courierID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    dateArrived.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    statusID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    trackingID.textContent = doc.id;
-    courierID.textContent = doc.data().courierID;
-    collegeID.textContent = doc.data().collegeID;
-    dateArrived.textContent = dateArrivedValue;
-    statusID.textContent = doc.data().statusID;
-
-    studentsTable.appendChild(tableRow);
-    tableRow.appendChild(trackingID);
-    tableRow.appendChild(courierID);
-    tableRow.appendChild(collegeID);
-    tableRow.appendChild(dateArrived);
-    tableRow.appendChild(statusID);
-}
-
-function collectData() {
-    db.collection('currentParcelDatabase').get().then((snapshot) => {
-        snapshot.docs.forEach(doc => {
-            console.log("data retrieved! rendering data");
-            renderTable(doc);
-        })
-        console.log("data rendered!");
-    })
-}
-
 async function iframeTransition() {
     document.getElementById("loadingPane").style.visibility = "visible";
     document.getElementById("loadingPane").style.opacity = "1";
     await sleep(2000);
     document.getElementById("transitionLayerFrame").style.visibility = "hidden";
     document.getElementById("transitionLayerFrame").style.opacity = "0";
+}
+
+function updateDatabase() {
+    currentMili = Date.now();
+    currentSeconds = currentMili / 1000;
+    var docName = form.trackingID.value;
+    db.collection("currentParcelDatabase").doc(docName).set({
+            trackingID: form.trackingID.value,
+            courierID: form.courierID.value,
+            collegeID: form.collegeID.value,
+            dateArrived: firebase.firestore.FieldValue.serverTimestamp(),
+            statusID: "Received",
+        })
+        .then(() => {
+            console.log("Data uploaded!")
+            window.location.href = 'index.html'
+        })
+        .catch((error) => {
+            console.log("Hello! this isn't working!");
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("Hello! this isn't working!");
+            console.log("error : " + errorCode);
+            console.log("details : " + errorMessage);
+        })
 }

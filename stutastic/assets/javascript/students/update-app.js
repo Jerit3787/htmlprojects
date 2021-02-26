@@ -203,7 +203,8 @@ async function loadForm() {
                             admin: false,
                         })
                         .then(() => {
-                            console.log("Student successfully registered!")
+                            console.log("Student successfully registered!");
+                            window.location.href = 'index.html';
                         })
                         .catch((error) => {
                             console.log("Hello! this isn't working!");

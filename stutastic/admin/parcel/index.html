@@ -48,6 +48,24 @@
 </head>
 
 <body>
+    <div id="loadingPane" style="display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 6;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s, visibility 0.2s;
+    background-color: white;">
+        <!-- MDL Spinner Component -->
+        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+    </div>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
@@ -113,141 +131,31 @@
                             <h3>List Parcel</h3>
                         </div>
                         <br>
-                        <!-- Raised button with ripple -->
-                        <!-- Simple Textfield -->
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Text...</label>
-                            </div>
-                        </form>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick="window.location.href='add-parcel.html' ">Add Parcel</button>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:10px;">Remove Parcel</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" onClick="window.location.href='add-parcel.html' ">Add Parcel</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick="refreshTable()" style="margin-left:10px;">Refresh</button>
                     </div>
 
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable" style="width:100%;">
+                    <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
                         <thead>
                             <tr>
                                 <th class="mdl-data-table__cell--non-numeric">Tracking Number</th>
                                 <th class="mdl-data-table__cell--non-numeric">Courier</th>
                                 <th class="mdl-data-table__cell--non-numeric">College Number</th>
-                                <th class="mdl-data-table__cell--non-numeric">Date Arrived</th>
+                                <th class="mdl-data-table__cell--non-numeric mdl-data-table__header--sorted-ascending">Date Arrived</th>
+                                <th class="mdl-data-table__cell--non-numeric">Status</th>
+                                <th class="mdl-data-table__cell--non-numeric">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">JNEIH49IVJE88J4</td>
-                                <td class="mdl-data-table__cell--non-numeric">POSLAJU</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">EUN48U5UNF85IJ54</td>
-                                <td class="mdl-data-table__cell--non-numeric">J&T</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">MY4859FJBH4INH3D</td>
-                                <td class="mdl-data-table__cell--non-numeric">CITYLINK</td>
-                                <td class="mdl-data-table__cell--non-numeric">MJ204134</td>
-                                <td class="mdl-data-table__cell--non-numeric">22/01/2021</td>
-                            </tr>
+                        <tbody id="parcelTable">
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
+    </div>
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
     </div>
 </body>
 

@@ -44,10 +44,28 @@
     <link type="text/css" rel="stylesheet" href="../../assets/stylesheet/styles-demo.css" />
 
     <!-- import and init firebase configuration -->
-    <script src="../../assets/javascript/parcel/app.js"></script>
+    <script src="../../assets/javascript/parcel/update-app.js"></script>
 </head>
 
 <body>
+    <div id="loadingPane" style="display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 6;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s, visibility 0.2s;
+    background-color: white;">
+        <!-- MDL Spinner Component -->
+        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+    </div>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
@@ -117,24 +135,24 @@
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Tracking Number</label>
+                                <input class="mdl-textfield__input" type="text" name="trackingID">
+                                <label class="mdl-textfield__label" for="sample1">ex. MY19379KWC83J</label>
                             </div>
                             <br>
                             <label>Courier :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Courier</label>
+                                <input class="mdl-textfield__input" type="text" name="courierID">
+                                <label class="mdl-textfield__label" for="sample1">ex. POSLAJU</label>
                             </div>
                             <br>
                             <label>Student's College Number :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="sample1">
-                                <label class="mdl-textfield__label" for="sample1">Courier</label>
+                                <input class="mdl-textfield__input" type="text" name="collegeID">
+                                <label class="mdl-textfield__label" for="sample1">ex. MJXXXXXX</label>
                             </div>
                         </form>
                         <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" form="addParcelForm" value="Submit">Add Parcel</button>
