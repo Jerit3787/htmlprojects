@@ -157,8 +157,11 @@ function updateUserParcelDatabase(uid) {
         })
         .then(() => {
             // data successfully uploaded into currentParcelDatabase
-            console.log("Data uploaded!")
-            window.location.href = 'index.html'
+            console.log("Data uploaded!");
+            var titleMessage = 'Project Stutastic'
+            var parseMessage = "Your parcel (" + form.trackingID.value + ") has arrived at the school's counter! Come and collect it!";
+            var collegeID = form.collegeID.value;
+            sendNotification(titleMessage, parseMessage, collegeID);
         })
         .catch((error) => {
             // fail to upload into currentParcelDatabase
@@ -171,54 +174,29 @@ function updateUserParcelDatabase(uid) {
         })
 }
 
-function sendNotification() {
-    fetch('https://fcm.googleapis.com/v1/projects/stutastic-server/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer AAAAPtCJEj0:APA91bH2wgEDJL0ZxSWC0-xs0hm72hdPTaKkB0ealwcpi9ZkTyik01ZT9sUpcy2aT6ms9n0IEIYUQx68aNh_67agFFAct6zSBSjnfNekbUUBo-x5kGlCYWC1F7VpdFEH6R0DMb1dGz7g',
-            },
-            body: {
-                "message": {
-                    "token": 'c5YTQySi7X9M3U2MNkkCZp:APA91bFFlHxjRbq6Kk2bAKOlYqEFtSZ9Q3Q2tQZkrKBtdZ21J89MjeEikeEEZ6yn_3G4IdJiCAR_rpatPxnA44zsn3IYY82tDbPVMTcpyjolr-Hu-JAmXYc-BfkGUqLDHGEeIpLBmdg1',
-                    "notification": {
-                        "title": "FCM Message",
-                        "body": "This is a message from FCM"
-                    },
-                    "webpush": {
-                        "headers": {
-                            "Urgency": "high"
-                        },
-                        "notification": {
-                            "body": "This is a message from FCM to web",
-                            "requireInteraction": "true",
-                            "badge": "/badge-icon.png"
-                        }
-                    }
-                }
+var notificationToken;
+
+function sendNotification(title, message, collegeID) {
+    var docRef = db.collection("userUIDDatabase").doc(collegeID);
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            userUID = doc.data().UID;
+            getNotiToken(title, message, userUID);
+
+            function getNotiToken(title, message, userUID) {
+                var notiTokenData = db.collection("notificationTokenDatabase").doc(userUID);
+                notiTokenData.get().then((doc) => {
+                    console.log(doc.data().notificationToken);
+                    notificationToken = doc.data().notificationToken;
+                    var parseURL = 'https://danishsite.ml/send_notification.php?title=' + title + '&message=' + message + '&token=' + notificationToken;
+                    fetch(parseURL, { mode: 'no-cors', method: 'GET' });
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                })
             }
-        })
-        .then((response) => {
-            response.json()
-        })
-        .then((data) => {
-            console.log(data);
-        })
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
 }
-
-fetch('https://fcm.googleapis.com/fcm/notification', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'key=AIzaSyC5fAN0QL5RQWt0KgsJkODZER0VWngr0Rc',
-            'stutastic-server': '269786616381',
-
-        },
-        body: {
-            "operation": "create",
-            "notification_key_name": "appUser-Chris",
-            "registration_ids": ["c5YTQySi7X9M3U2MNkkCZp:APA91bFFlHxjRbq6Kk2bAKOlYqEFtSZ9Q3Q2tQZkrKBtdZ21J89MjeEikeEEZ6yn_3G4IdJiCAR_rpatPxnA44zsn3IYY82tDbPVMTcpyjolr-Hu-JAmXYc-BfkGUqLDHGEeIpLBmdg1"]
-        },
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));

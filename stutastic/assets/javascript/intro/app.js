@@ -156,29 +156,43 @@ function getToken() {
     messaging.getToken({ vapidKey: 'BNtpxUWoHMO1pV17coaKiiDBEUO71Su4ECqYbTPzPbATEV0EUvJ44sTivU_2so51AfyhbQZTTRbNftOXQf9WDlU' }).then((currentToken) => {
         if (currentToken) {
             // Send the token to your server and update the UI if necessary
-            userData.providerData.forEach(function(profile) {
-                userID = profile.uid;
-            });
-            db.collection("notificationTokenDatabase").doc(userID).set({
-                    notificationToken: currentToken,
-                })
-                .then(() => {
-                    console.log("Data uploaded!")
-                    button.setAttribute("disabled", "");
-                    button.innerHTML = "Enabled Push Notification";
-                    var notification = document.querySelector('.mdl-js-snackbar');
-                    notification.MaterialSnackbar.showSnackbar({
-                        message: 'Push Notification enabled!'
-                    });
-                })
-                .catch((error) => {
-                    console.log("Hello! this isn't working!");
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log("Hello! this isn't working!");
-                    console.log("error : " + errorCode);
-                    console.log("details : " + errorMessage);
-                })
+            console.log(currentToken);
+            var user = firebase.auth().currentUser;
+            var name, email, photoUrl, uid, emailVerified;
+
+            if (user != null) {
+                name = user.displayName;
+                email = user.email;
+                photoUrl = user.photoURL;
+                emailVerified = user.emailVerified;
+                uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                // this value to authenticate with your backend server, if
+                // you have one. Use User.getToken() instead.
+                uploadTokenNoti(uid);
+            }
+
+            function uploadTokenNoti(userID) {
+                db.collection("notificationTokenDatabase").doc(userID).set({
+                        notificationToken: currentToken,
+                    })
+                    .then(() => {
+                        console.log("Data uploaded!")
+                        button.setAttribute("disabled", "");
+                        button.innerHTML = "Enabled Push Notification";
+                        var notification = document.querySelector('.mdl-js-snackbar');
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: 'Push Notification enabled!'
+                        });
+                    })
+                    .catch((error) => {
+                        console.log("Hello! this isn't working!");
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log("Hello! this isn't working!");
+                        console.log("error : " + errorCode);
+                        console.log("details : " + errorMessage);
+                    })
+            }
         } else {
             // Show permission request UI
             console.log('No registration token available. Request permission to generate one.');

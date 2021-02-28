@@ -15,7 +15,6 @@ firebase.analytics();
 // Sets constant for firebase uility
 const auth = firebase.auth();
 const db = firebase.firestore();
-const messaging = firebase.messaging();
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
