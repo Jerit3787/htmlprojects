@@ -190,7 +190,9 @@ function sendNotification(title, message, collegeID) {
                     console.log(doc.data().notificationToken);
                     notificationToken = doc.data().notificationToken;
                     var parseURL = 'https://danishsite.ml/send_notification.php?title=' + title + '&message=' + message + '&token=' + notificationToken + "&icon=https://projects.danishsite.me/stutastic/assets/images/icon.png";
-                    fetch(parseURL, { mode: 'no-cors', method: 'GET' });
+                    fetch(parseURL, { mode: 'no-cors', method: 'GET' }).then(() => {
+                        window.location.assign('index.html');
+                    });
                 }).catch((error) => {
                     console.log("Error getting document:", error);
                 })
