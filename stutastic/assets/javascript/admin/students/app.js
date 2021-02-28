@@ -164,7 +164,7 @@ function renderTable(doc) {
             refreshTable();
             var notification = document.querySelector('.mdl-js-snackbar');
             notification.MaterialSnackbar.showSnackbar({
-                message: 'Parcel Deleted Successfully!'
+                message: 'Student Deleted Successfully!'
             });
         });
     })

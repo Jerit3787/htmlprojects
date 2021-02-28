@@ -33,7 +33,7 @@ function isLoggedIn() {
         if (user) {
             console.log("no action needed!");
         } else {
-            window.location.replace('../../auth/index.html');
+            window.location.replace('auth/index.html');
             console.log("redicted excetuted!");
         }
     })
@@ -60,7 +60,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 function signOutFirebase() {
     firebase.auth().signOut().then(function() {
-        window.location.replace('../../auth/index.html');
+        window.location.replace('auth/index.html');
     }).catch(function(error) {
         console.log("Hello! this isn't working!");
     });
