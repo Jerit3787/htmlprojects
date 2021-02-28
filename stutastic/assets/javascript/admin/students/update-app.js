@@ -200,11 +200,31 @@ async function loadForm() {
                             collegeID: form.collegeID.value,
                             emailID: form.emailID.value,
                             classID: form.classID.value,
-                            admin: false,
+                            status: 'Added'
                         })
                         .then(() => {
                             console.log("Student successfully registered!");
-                            window.location.href = 'index.html';
+                            uploadUserUID(userStudent);
+                        })
+                        .catch((error) => {
+                            console.log("Hello! this isn't working!");
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log("Hello! this isn't working!");
+                            console.log("error : " + errorCode);
+                            console.log("details : " + errorMessage);
+                        })
+                }
+
+                function uploadUserUID(userDatabase) {
+                    var userUID = userDatabase.uid;
+                    collegeID = form.collegeID.value;
+                    db.collection("userUIDDatabase").doc(collegeID).set({
+                            UID: userUID,
+                        })
+                        .then(() => {
+                            console.log("Student UID updated!");
+                            window.location.href = 'index.html'
                         })
                         .catch((error) => {
                             console.log("Hello! this isn't working!");
@@ -220,6 +240,9 @@ async function loadForm() {
                 console.log("Hello! this isn't working!");
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                console.log("Hello! this isn't working!");
+                console.log("error : " + errorCode);
+                console.log("details : " + errorMessage);
                 // ..
             });
     })

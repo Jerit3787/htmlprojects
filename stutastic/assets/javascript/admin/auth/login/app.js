@@ -29,14 +29,12 @@ function isLoggedIn() {
         }
 
         console.log("userStatus: " + status);
-
         if (user) {
             checkHasRelinked(user);
             console.log("redirect executed!");
         } else {
             console.log("loginUI executed!");
             startUI();
-            noLogin = noLogin + 1;
         }
     })
 }
@@ -70,18 +68,43 @@ function startUI() {
     ui.start('#firebaseui-auth-container', uiConfig);
 }
 
-var noLogin = 0;
-
 // init checks on account activations
 function checkHasRelinked(user) {
-    var uid = user.uid;
+    collectData();
 
-    db.collection('userDatabase').doc(uid).get().then((doc) => {
-        var status = doc.data().status;
-        if (status == "Activated") {
-            window.location.assign("../index.html");
-        } else {
-            window.location.assign("link-account.html");
+    function collectData() {
+        var user = firebase.auth().currentUser;
+        var name, email, photoUrl, uid, emailVerified;
+
+        if (user != null) {
+            uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+            // this value to authenticate with your backend server, if
+            // you have one. Use User.getToken() instead.
+
+            db.collection('adminDatabase').doc(uid).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        console.log('user has admins right. redirecting')
+                        window.location.replace('../../index.html');
+                    } else {
+                        // doc.data() will be undefined in this case
+                        var notification = document.querySelector('.mdl-js-snackbar');
+                        notification.MaterialSnackbar.showSnackbar({
+                            message: "Sorry! The account that you have logged in does not have admin rights! Please try again!"
+                        });
+                        signOutFirebase();
+
+                        function signOutFirebase() {
+                            firebase.auth().signOut().then(function() {
+                                console.log("Account signed out!")
+                            }).catch(function(error) {
+                                console.log("Hello! this isn't working!");
+                            });
+                        };
+                    }
+                }).catch((error => {
+                    console.log(error);
+                }))
         }
-    })
+    }
 }

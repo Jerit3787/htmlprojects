@@ -91,28 +91,93 @@ function announceUser(user) {
     }
 }
 
-var form;
-loadForm();
+async function refreshTable() {
+    const removeChilds = (parent) => {
+        while (parent.lastChild) {
+            parent.removeChild(parent.lastChild);
+        }
+    };
 
-async function loadForm() {
+    // select target target 
+    const body = document.querySelector('#studentsTable');
+
+    // remove all child nodes
+    console.log("Refreshing table");
+    console.log("Deleting table");
+    await removeChilds(body);
+    loadTable();
+
+}
+
+var studentsTable;
+loadTable();
+
+async function loadTable() {
     await sleep(2000);
-    form = document.querySelector('#addParcelForm');
-    console.log("form ready for usage!");
+    studentsTable = document.querySelector('#studentsTable');
+    console.log("table ready for initlization!");
+    await collectData();
     document.getElementById("loadingPane").style.visibility = "hidden";
     document.getElementById("loadingPane").style.opacity = "0";
+}
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        updateDatabase();
+function renderTable(doc) {
+    let tableRow = document.createElement('tr');
+    let collegeID = document.createElement('td');
+    let name = document.createElement('td');
+    let classID = document.createElement('td');
+    let emailID = document.createElement('td');
+    let status = document.createElement('td');
+    let actions = document.createElement('td');
+    let cross = document.createElement("div");
+
+    tableRow.setAttribute('data-id', doc.id);
+    collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    name.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    classID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    emailID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    status.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    actions.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    cross.setAttribute('class', "material-icons");
+    collegeID.textContent = doc.data().collegeID;
+    name.textContent = doc.data().name;
+    classID.textContent = doc.data().classID;
+    emailID.textContent = doc.data().emailID;
+    status.textContent = doc.data().status;
+    cross.textContent = "clear";
+
+    studentsTable.appendChild(tableRow);
+    actions.appendChild(cross);
+    tableRow.appendChild(collegeID);
+    tableRow.appendChild(name);
+    tableRow.appendChild(classID);
+    tableRow.appendChild(emailID);
+    tableRow.appendChild(status);
+    tableRow.appendChild(actions);
+
+    cross.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let id = e.target.parentElement.parentElement.getAttribute('data-id');
+        console.log("deleting data from database");
+        db.collection("userDatabase").doc(id).delete().then(() => {
+            console.log("data deleted successfully!");
+            refreshTable();
+            var notification = document.querySelector('.mdl-js-snackbar');
+            notification.MaterialSnackbar.showSnackbar({
+                message: 'Parcel Deleted Successfully!'
+            });
+        });
     })
 }
 
-function toDateTime(secs) {
-    var t = new Date(1970, 0, 1); // Epoch
-    t.setSeconds(secs);
-    dateMonth = t.getMonth() + 1;
-    var stringDate = t.getDate() + "/" + dateMonth + "/" + t.getFullYear();
-    return stringDate;
+function collectData() {
+    db.collection('userDatabase').get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            console.log("data retrieved! rendering data");
+            renderTable(doc);
+        })
+        console.log("data rendered!");
+    })
 }
 
 async function iframeTransition() {
@@ -121,29 +186,4 @@ async function iframeTransition() {
     await sleep(2000);
     document.getElementById("transitionLayerFrame").style.visibility = "hidden";
     document.getElementById("transitionLayerFrame").style.opacity = "0";
-}
-
-function updateDatabase() {
-    currentMili = Date.now();
-    currentSeconds = currentMili / 1000;
-    var docName = form.trackingID.value;
-    db.collection("currentParcelDatabase").doc(docName).set({
-            trackingID: form.trackingID.value,
-            courierID: form.courierID.value,
-            collegeID: form.collegeID.value,
-            dateArrived: firebase.firestore.FieldValue.serverTimestamp(),
-            statusID: "Received",
-        })
-        .then(() => {
-            console.log("Data uploaded!")
-            window.location.href = 'index.html'
-        })
-        .catch((error) => {
-            console.log("Hello! this isn't working!");
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log("Hello! this isn't working!");
-            console.log("error : " + errorCode);
-            console.log("details : " + errorMessage);
-        })
 }

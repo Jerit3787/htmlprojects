@@ -15,6 +15,7 @@ firebase.analytics();
 // Sets constant for firebase uility
 const auth = firebase.auth();
 const db = firebase.firestore();
+
 isLoggedIn();
 
 // redirect configuration
@@ -122,52 +123,61 @@ async function loadTable() {
 }
 
 function renderTable(doc) {
+    var dateAddedValue = toDateTime(doc.data().dateAdded.seconds);
     let tableRow = document.createElement('tr');
-    let collegeID = document.createElement('td');
     let name = document.createElement('td');
-    let classID = document.createElement('td');
     let emailID = document.createElement('td');
+    let role = document.createElement('td');
+    let dateAdded = document.createElement('td');
     let actions = document.createElement('td');
     let cross = document.createElement("div");
 
     tableRow.setAttribute('data-id', doc.id);
-    collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric");
     name.setAttribute('class', "mdl-data-table__cell--non-numeric");
-    classID.setAttribute('class', "mdl-data-table__cell--non-numeric");
     emailID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    role.setAttribute('class', "mdl-data-table__cell--non-numeric");
+    dateAdded.setAttribute('class', "mdl-data-table__cell--non-numeric");
     actions.setAttribute('class', "mdl-data-table__cell--non-numeric");
     cross.setAttribute('class', "material-icons");
-    collegeID.textContent = doc.data().collegeID;
     name.textContent = doc.data().name;
-    classID.textContent = doc.data().classID;
     emailID.textContent = doc.data().emailID;
+    role.textContent = doc.data().role;
+    dateAdded.textContent = dateAddedValue;
     cross.textContent = "clear";
 
     studentsTable.appendChild(tableRow);
     actions.appendChild(cross);
-    tableRow.appendChild(collegeID);
     tableRow.appendChild(name);
-    tableRow.appendChild(classID);
     tableRow.appendChild(emailID);
+    tableRow.appendChild(role);
+    tableRow.appendChild(dateAdded);
     tableRow.appendChild(actions);
 
     cross.addEventListener('click', (e) => {
         e.stopPropagation();
         let id = e.target.parentElement.parentElement.getAttribute('data-id');
         console.log("deleting data from database");
-        db.collection("userDatabase").doc(id).delete().then(() => {
+        db.collection("adminDatabase").doc(id).delete().then(() => {
             console.log("data deleted successfully!");
             refreshTable();
             var notification = document.querySelector('.mdl-js-snackbar');
             notification.MaterialSnackbar.showSnackbar({
-                message: 'Parcel Deleted Successfully!'
+                message: 'Admin deleted successfully'
             });
         });
     })
 }
 
+function toDateTime(secs) {
+    var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    dateMonth = t.getMonth() + 1;
+    var stringDate = t.getDate() + "/" + dateMonth + "/" + t.getFullYear();
+    return stringDate;
+}
+
 function collectData() {
-    db.collection('userDatabase').get().then((snapshot) => {
+    db.collection('adminDatabase').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             console.log("data retrieved! rendering data");
             renderTable(doc);

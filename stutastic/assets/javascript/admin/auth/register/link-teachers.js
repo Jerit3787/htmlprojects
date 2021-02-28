@@ -15,6 +15,7 @@ firebase.analytics();
 // Sets constant for firebase uility
 const auth = firebase.auth();
 const db = firebase.firestore();
+const messaging = firebase.messaging();
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -32,7 +33,7 @@ async function loadForm() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        relinkAccount();
+        checkRegistrationToken();
     })
 
     var user = firebase.auth().currentUser;
@@ -43,8 +44,43 @@ async function loadForm() {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
     }
+}
 
-    form.emailID.value = email;
+function checkRegistrationToken() {
+    console.log("starting checking")
+    var regToken = form.registrationToken.value;
+    var countToken = 0;
+    var notCountToken = 0;
+
+
+    db.collection('tokenRegister').get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+            countToken = countToken + 1;
+            if (regToken == doc.id) {
+                relinkAccount();
+            } else {
+                notCountToken = notCountToken + 1;
+                console.log("regToken not valid")
+            }
+        })
+        checkValid();
+
+        function checkValid() {
+            if (countToken == notCountToken) {
+                var notification = document.querySelector('.mdl-js-snackbar');
+                notification.MaterialSnackbar.showSnackbar({
+                    message: 'The token you have entered is invalid or has been used.'
+                });
+            } else {
+                db.collection("tokenRegister").doc(regToken).delete().then(() => {
+                    console.log("Token Passed");
+                }).catch((error) => {
+                    console.error("Error : ", error);
+                });
+            }
+        }
+    })
+    console.log("data rendered!");
 }
 
 function updateUserName() {
@@ -55,65 +91,35 @@ function updateUserName() {
                 displayName: profile.displayName,
             }).then(function() {
                 console.log("User account name successfully synced with Microsoft");
-                user.unlink('password').then(() => {
-                    // Auth provider unlinked from account
-                    // ...
-                    console.log("Account unlinked from email. Only Microsoft Account is allowed to be used for login");
-                    uploadData();
-                }).catch((error) => {
-                    // An error happened
-                    // ...
-                });
+                uploadData();
                 // Update successful.
             }).catch(function(error) {
                 // An error happened.
                 console.log("Hello! this isn't working!", error);
             });
         } else {
-            console.log("Not a Microsoft Account linked");
+            console.log("Not a Microsoft Account database");
         }
     });
 }
 
 // starts relinking process
 function relinkAccount() {
-    checkAssignedAccount();
 
-    function checkAssignedAccount() {
-        firebase.auth().signInWithEmailAndPassword(form.emailID.value, form.adminPassword.value)
-            .then((userCredential) => {
-                // Signed in 
-                var user = userCredential.user;
-                // ...
-                console.log("Account linking success", user);
-                unlink();
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log("Account linking error", error);
-                var notification = document.querySelector('.mdl-js-snackbar');
-                notification.MaterialSnackbar.showSnackbar({
-                    message: error.message,
-                });
-                form.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        relinkAccount();
-                    })
-                    // ..
-            });
-    }
-
-    function unlink() {
-        var user = firebase.auth().currentUser;
-        user.unlink('microsoft.com').then(() => {
-            console.log("Account unlinked");
+    firebase.auth().createUserWithEmailAndPassword(form.emailID.value, form.adminPassword.value)
+        .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user;
+            console.log("Account creation success", user);
             linkMicrosoft();
-        }).catch((error) => {
-            console.log("Hello! this isn't working!", error.message);
             // ...
+        })
+        .catch((error) => {
+            console.log("Account creation error", error);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
         });
-    }
 
     function linkMicrosoft() {
         var provider = new firebase.auth.OAuthProvider('microsoft.com');
@@ -131,8 +137,9 @@ function relinkAccount() {
             var user = result.user;
             console.log("User account linked with Microsoft & Email");
             updateUserName();
+
         }).catch((error) => {
-            console.log("Hello! this isn't working!", error.message);
+            console.log("Hello! this isn't working!");
         });
     }
 }
@@ -156,13 +163,16 @@ function uploadData() {
     }
 
     // push infomation to adminDatabase
-    db.collection("userDatabase").doc(uid).update({
-            status: 'Activated',
+    db.collection("adminDatabase").doc(uid).set({
+            name: name,
+            emailID: email,
+            dateAdded: firebase.firestore.FieldValue.serverTimestamp(),
+            role: 'teacher',
         })
         .then(() => {
             // data successfully uploaded into adminDatabase
-            console.log("Activation status updated successfully!");
-            window.location.assign('../intro/index.html');
+            console.log("Admin data uploaded successfully");
+            window.location.assign('../../intro/index.html');
         })
         .catch((error) => {
             // fail to upload into adminDatabase

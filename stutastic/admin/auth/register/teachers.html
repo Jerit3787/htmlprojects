@@ -11,40 +11,40 @@
 
     <!-- material-ui intialization-->
     <!-- init Material UI CSS -->
-    <link rel="stylesheet" href="../assets/stylesheet/material-ui/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="../../../assets/stylesheet/material-ui/material.cyan-light_blue.min.css">
     <!-- init Material UI Framework -->
-    <script src="../assets/javascript/material-ui/material.min.js"></script>
+    <script src="../../../assets/javascript/material-ui/material.min.js"></script>
     <!-- init Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- init Roboto font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <!-- init user's customised stylesheet -->
-    <link rel="stylesheet" href="../assets/stylesheet/styles.css">
+    <link rel="stylesheet" href="../../../assets/stylesheet/styles.css">
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="../assets/javascript/firebase/firebase-app.js"></script>
+    <script src="../../../assets/javascript/firebase/firebase-app.js"></script>
 
     <!-- Add Firebase products that you want to use -->
     <!-- init firebase analytics -->
-    <script src="../assets/javascript/firebase/firebase-analytics.js"></script>
+    <script src="../../../assets/javascript/firebase/firebase-analytics.js"></script>
     <!-- init firebase authentication -->
-    <script src="../assets/javascript/firebase/firebase-auth.js"></script>
+    <script src="../../../assets/javascript/firebase/firebase-auth.js"></script>
     <!-- init firebase firestore -->
-    <script src="../assets/javascript/firebase/firebase-firestore.js"></script>
+    <script src="../../../assets/javascript/firebase/firebase-firestore.js"></script>
     <!-- init firebase ui -->
-    <script src="../assets/javascript/firebase/firebaseui.js"></script>
+    <script src="../../../assets/javascript/firebase/firebaseui.js"></script>
     <!-- init firebase ui authentication -->
-    <script src="../assets/javascript/firebase/firebase-ui-auth.js"></script>
+    <script src="../../../assets/javascript/firebase/firebase-ui-auth.js"></script>
     <!-- init firebase-ui CSS -->
-    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui.css" />
+    <link type="text/css" rel="stylesheet" href="../../../assets/stylesheet/firebase/firebase-ui.css" />
     <!-- init firebase-ui authentication CSS -->
-    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/firebase/firebase-ui-auth.css" />
+    <link type="text/css" rel="stylesheet" href="../../../assets/stylesheet/firebase/firebase-ui-auth.css" />
     <!-- init user's customised CSS -->
-    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/styles.css" />
-    <link type="text/css" rel="stylesheet" href="../assets/stylesheet/styles-demo.css" />
+    <link type="text/css" rel="stylesheet" href="../../../assets/stylesheet/styles.css" />
+    <link type="text/css" rel="stylesheet" href="../../../assets/stylesheet/styles-demo.css" />
 
     <!-- import and init firebase configuration -->
-    <script src="../../assets/javascript/auth/link.js"></script>
+    <script src="../../../../assets/javascript/admin/auth/register/link-teachers.js"></script>
 </head>
 
 <body>
@@ -88,7 +88,7 @@
                             min-height: 200px;
                             background-position: 90% 100%;
                             background-repeat: no-repeat;
-                            background: url('../assets/images/dog.png') center / cover;
+                            background: url('../../../assets/images/dog.png') center / cover;
                         }
                         
                         .demo-card-wide>.mdl-card__menu {
@@ -103,21 +103,30 @@
                         <div class="mdl-card__supporting-text">
                             <!-- Simple Textfield -->
                             <form id="addEmailAdmin" action="#">
-                                <label>Please provide password provided by your school's admins.</label>
+                                <label>Now you will create an email with password account. Then, we'll link you with your school's Microsoft account for secure access to the site.</label>
                                 <br>
                                 <br>
                                 <label>School Email :</label>
                                 <br>
                                 <div class="mdl-textfield mdl-js-textfield">
-                                    <input class="mdl-textfield__input" type="email" name="emailID" disabled>
+                                    <input class="mdl-textfield__input" type="email" name="emailID">
+                                    <label class="mdl-textfield__label" for="sample1">ex. user@tgb.mrsm.edu.my</label>
                                     <span class="mdl-textfield__error">Not Correct Form Of Email</span>
                                 </div>
                                 <br>
-                                <label>Assigned password :</label>
+                                <label>New password : (this will become your admin password)</label>
                                 <br>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" type="password" name="adminPassword">
                                     <label class="mdl-textfield__label" for="sample1">admin password</label>
+                                </div>
+                                <br>
+                                <label>Registration Token :</label>
+                                <br>
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" name="registrationToken" pattern="[0-9]{6}">
+                                    <label class="mdl-textfield__label" for="sample1">ex. 904956</label>
+                                    <span class="mdl-textfield__error">Token must be 6 digits</span>
                                 </div>
                             </form>
                             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" form="addEmailAdmin" value="Submit">Register Email</button>
@@ -125,7 +134,8 @@
                     </div>
                 </div>
             </div>
-        </main>
+    </div>
+    </main>
     </div>
     <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
         <div class="mdl-snackbar__text"></div>

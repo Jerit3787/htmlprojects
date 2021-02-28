@@ -44,28 +44,10 @@
     <link type="text/css" rel="stylesheet" href="../../assets/stylesheet/styles-demo.css" />
 
     <!-- import and init firebase configuration -->
-    <script src="../../assets/javascript/admin/parcel/update-app.js"></script>
+    <script src="../../assets/javascript/admin/admins/update-app.js"></script>
 </head>
 
 <body>
-    <div id="loadingPane" style="display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    z-index: 6;
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.2s, visibility 0.2s;
-    background-color: white;">
-        <!-- MDL Spinner Component -->
-        <div class="mdl-spinner mdl-js-spinner is-active"></div>
-    </div>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
             <div class="mdl-layout__header-row">
@@ -110,50 +92,41 @@
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
                 <a class="mdl-navigation__link" href="../index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Parcel</a>
-                <a class="mdl-navigation__link" href="../students/index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Students</a>
-                <a class="mdl-navigation__link" href="../admins/index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">admin_panel_settings</i>Admins</a>
+                <a class="mdl-navigation__link" href="../students/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Students</a>
+                <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">admin_panel_settings</i>Admins</a>
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">person</i><span class="visuallyhidden">Account</span></a>
             </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
             <div class="mdl-grid demo-content">
                 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div class="mdl-cell mdl-cell--12-col">
-                        <p style="color:grey; font-size:10px;">Home > Parcel > Add New Parcel</p>
-                        <h3>Add New Parcel</h3>
+                        <p style="color:grey; font-size:10px;">Home > Students > Add New Admin</p>
+                        <h3>Add New Admin</h3>
                     </div>
                     <div class="mdl-cell mdl-cell--12-col">
                         <!-- Textfield with Floating Label -->
-                        <form id="addParcelForm" action="#">
-                            <label>Tracking Number :</label>
+                        <form id="addStudentForm">
+                            <label>Add your admin by giving them the registration page and the registration token</label>
+                            <br>
+                            <br>
+                            <label>Registration Page :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="trackingID">
-                                <label class="mdl-textfield__label" for="sample1">ex. MY19379KWC83J</label>
+                                <input id="link" class="mdl-textfield__input" type="text" name="sitePage" value="https://stutastic.danishsite.me/admin/auth/register/index.html">
                             </div>
                             <br>
-                            <label>Courier :</label>
+                            <label>Registration Token :</label>
                             <br>
                             <!-- Simple Textfield -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="courierID" pattern="[A-Z]{1,20}">
-                                <label class="mdl-textfield__label" for="sample1">ex. POSLAJU</label>
-                                <span class="mdl-textfield__error">Only Use Caps Lock. Max 20 Characters</span>
-                            </div>
-                            <br>
-                            <label>Student's College Number :</label>
-                            <br>
-                            <!-- Simple Textfield -->
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="collegeID" pattern="[M][J][0-9]{6}">
-                                <label class="mdl-textfield__label" for="sample1">ex. MJXXXXXX</label>
-                                <span class="mdl-textfield__error">College Number Not In A Correct Form</span>
+                                <input class="mdl-textfield__input" type="text" name="registerationToken" disabled>
                             </div>
                         </form>
-                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" form="addParcelForm" value="Submit">Add Parcel</button>
-                        <button style="margin:10px;" class="mdl-button mdl-js-button mdl-button--raised" onClick="window.location.href='index.html'">Cancel</button>
+                        <button style="margin:10px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onClick="copyToClipboard()">Copy Link to Clipboard</button>
+                        <button style="margin:10px;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick="window.location.href='index.html'">Back</button>
                     </div>
                 </div>
             </div>
