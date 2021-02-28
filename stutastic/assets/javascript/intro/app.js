@@ -51,7 +51,7 @@ function nextPage() {
     var after = document.querySelector('#after');
     var color = document.querySelector('#backgroundColor');
 
-    if (currentPage >= 3) {
+    if (currentPage >= 4) {
         console.log("maximum page reached!")
     } else {
         currentPage = currentPage + 1;
@@ -82,10 +82,14 @@ function nextPage() {
                 indicatorPage3.style.color = "#FBFAF5";
                 page2.style.width = "0";
                 page2.style.display = "none";
-                after.setAttribute("disabled", "");
-                after.style.color = "rgba(251,250,245,0.2)";
+                after.innerHTML = "Start"
                 page3.style.width = "100%";
                 page3.style.display = "flex";
+                color.style.backgroundColor = "#da0ae9"
+                break;
+
+            case 4:
+                openConsole();
                 break;
         }
     }
@@ -135,12 +139,20 @@ function previousPage() {
                 page3.style.display = "none";
                 page2.style.width = "100%";
                 page2.style.display = "flex";
+                after.innerHTML = "<span class='material-icons'>navigate_next</span><span class='mdl-button__ripple-container'><span class='mdl-ripple'></span></span>"
                 color.style.backgroundColor = "#03a373";
-                after.removeAttribute("disabled");
                 after.style.color = "#FBFAF5";
                 break;
+
+            case 3:
+                currentPage = currentPage - 1;
+                changePage();
         }
     }
+}
+
+function openConsole() {
+    window.location.assign('../index.html');
 }
 
 var userID
