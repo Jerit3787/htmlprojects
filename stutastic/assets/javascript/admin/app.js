@@ -125,6 +125,8 @@ loadTable();
 async function loadTable() {
     await sleep(2000);
     studentsTable = document.querySelector('#parcelTable');
+    uncollectedData = document.querySelector("#uncollected");
+    dailyData = document.querySelector("#daily");
     console.log("table ready for initlization!");
     await collectData();
     document.getElementById("loadingPane").style.visibility = "hidden";
@@ -139,33 +141,73 @@ function toDateTime(secs) {
     return stringDate;
 }
 
+function getTimeNow() {
+    let currentDate = new Date();
+    let cDay = currentDate.getDate()
+    let cMonth = currentDate.getMonth() + 1
+    let cYear = currentDate.getFullYear()
+    console.log(cDay);
+    console.log(cMonth);
+    console.log(cYear);
+    var stringDate = cDay + "/" + cMonth + "/" + cYear;
+    return stringDate;
+}
+
+function renderUncollected() {
+    uncollectedData.innerHTML = "<center>Total Uncollected Parcel : " + countUncollected + "</center>";
+    dailyData.innerHTML = "<center>Total Daily Parcel : " + countDaily + "</center>";
+}
+
+var countUncollected = 0;
+var newDate;
+var countDaily = 0;
+
 function renderTable(doc) {
+    var newDate = getTimeNow();
+    console.log(newDate);
     var dateArrivedValue = toDateTime(doc.data().dateArrived.seconds);
-    let tableRow = document.createElement('tr');
-    let trackingID = document.createElement('td');
-    let courierID = document.createElement('td');
-    let collegeID = document.createElement('td');
-    let dateArrived = document.createElement('td');
-    let statusID = document.createElement('td');
 
-    tableRow.setAttribute('data-id', doc.id);
-    trackingID.setAttribute('class', "mdl-data-table__cell--non-numeric");
-    courierID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    dateArrived.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    statusID.setAttribute('class', "mdl-data-table__cell--non-numeric")
-    trackingID.textContent = doc.id;
-    courierID.textContent = doc.data().courierID;
-    collegeID.textContent = doc.data().collegeID;
-    dateArrived.textContent = dateArrivedValue;
-    statusID.textContent = doc.data().statusID;
+    var statusIcon;
+    var currentStatus = doc.data().statusID;
+    if (currentStatus == "Received") {
+        statusIcon = "done";
+        countUncollected = countUncollected + 1;
+        processData();
+    } else {
+        statusIcon = "done_all";
+    }
 
-    studentsTable.appendChild(tableRow);
-    tableRow.appendChild(trackingID);
-    tableRow.appendChild(courierID);
-    tableRow.appendChild(collegeID);
-    tableRow.appendChild(dateArrived);
-    tableRow.appendChild(statusID);
+    if (newDate == dateArrivedValue) {
+        countDaily = countDaily + 1;
+    }
+
+    function processData() {
+        let tableRow = document.createElement('tr');
+        let trackingID = document.createElement('td');
+        let courierID = document.createElement('td');
+        let collegeID = document.createElement('td');
+        let dateArrived = document.createElement('td');
+        let statusID = document.createElement('td');
+
+        tableRow.setAttribute('data-id', doc.id);
+        trackingID.setAttribute('class', "mdl-data-table__cell--non-numeric");
+        courierID.setAttribute('class', "mdl-data-table__cell--non-numeric")
+        collegeID.setAttribute('class', "mdl-data-table__cell--non-numeric")
+        dateArrived.setAttribute('class', "mdl-data-table__cell--non-numeric")
+        statusID.setAttribute('class', "mdl-data-table__cell--non-numeric")
+        trackingID.textContent = doc.id;
+        courierID.textContent = doc.data().courierID;
+        collegeID.textContent = doc.data().collegeID;
+        dateArrived.textContent = dateArrivedValue;
+        statusID.textContent = doc.data().statusID;
+
+        studentsTable.appendChild(tableRow);
+        tableRow.appendChild(trackingID);
+        tableRow.appendChild(courierID);
+        tableRow.appendChild(collegeID);
+        tableRow.appendChild(dateArrived);
+        tableRow.appendChild(statusID);
+    }
 }
 
 function collectData() {
@@ -173,6 +215,8 @@ function collectData() {
         snapshot.docs.forEach(doc => {
             console.log("data retrieved! rendering data");
             renderTable(doc);
+            console.log("data rendered!");
+            renderUncollected();
         })
         console.log("data rendered!");
     })
