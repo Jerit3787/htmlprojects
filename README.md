@@ -8,7 +8,7 @@ All of my computer science projects! [Main site](https://jerit3787.github.io/htm
 | :---: | :---: | :---: | :--------: | :--- |
 | HTML & CSS basics | Finished | May 2020 | [View Link](https://jerit3787.github.io/htmlprojects/htmlncss-basics/index.html) | Not Available |
 | MathsQuiz | Canceled until further notice | August 2021 | [Login UI](https://jerit3787.github.io/htmlprojects/mathsquiz/login/v1/index.html) \| [Main UI - Dark](https://jerit3787.github.io/htmlprojects/mathsquiz/mainui/v1/index.html) \| *[Main UI - Light](https://jerit3787.github.io/htmlprojects/mathsquiz/mainui/v1/index%20-%20light.html) | [Project Page](http://www.mathsquiz.ml) |
-| PageLinks | Completed | January 2021 | [View Link](https://jerit3787.github.io/htmlprojects/pagelinks/index.html) | [Project Page](https://links.danishsite.me) |
-| Project Stutastic | Completed | February 2021 | [Development Link (v2)](https://dev.stutastic.danishsite.me) | [Project Page (v1)](https://stutastic.danishsite.me) |
+| PageLinks | Completed | January 2021 | [View Link](https://jerit3787.github.io/htmlprojects/pagelinks/index.html) | [Project Page](https://jerit3787.github.io/links)|
+| Project Stutastic | Completed | February 2021 | [Development Link (v2)](https://dev.stutastic.danishsite.me) | [Project Page (v1)](https://jerit3787.github.io/stutastic) |
 | Result Generator | Finished | Febuary 2021 | [View Link](https://jerit3787.github.io/htmlprojects/straightspm/index.html) | Not Available |
 * Light theme will not be updated prior tu each commit to continue focusing improving ui. Later on, light theme will be included in one file to enable light/dark settings.
